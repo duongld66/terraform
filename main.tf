@@ -69,7 +69,7 @@ resource "aws_route_table" "tf-example-rt-2" {
 }
 
 resource "aws_security_group" "default" {
-  name = "HTTP and SSH"
+  name = "test-terraform-sg"
   vpc_id      = aws_vpc.tf-test-15.id
 
   ingress {
@@ -93,6 +93,7 @@ resource "aws_security_group" "default" {
 
 resource "aws_instance" "tf-1" {
   ami           = "ami-0f2eac25772cd4e36"
+  subnet_id = aws_subnet.tf-example-public-ap-southeast-1[0].id
   instance_type = "t2.micro"
   vpc_security_group_ids = [ aws_security_group.default.id ]
   tags = {
